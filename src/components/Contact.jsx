@@ -11,7 +11,7 @@ const Contact = ({ isVisible }) => {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const API_URL = "https://my-portfolio-backend-4gmn.onrender.com/api/contact";
+  const API_URL = "https://portfolio-backend-xncd.onrender.com/api/contact";
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
