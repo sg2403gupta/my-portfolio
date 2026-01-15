@@ -8,24 +8,14 @@ const Contact = ({ isVisible }) => {
     message: "",
   });
 
-  const [status, setStatus] = useState({
-    type: "",
-    message: "",
-  });
-
+  const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  //Connecting backend to frontend
   const API_URL = "https://my-portfolio-backend-4gmn.onrender.com/api/contact";
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-    if (status.message) {
-      setStatus({ type: "", message: "" });
-    }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (status.message) setStatus({ type: "", message: "" });
   };
 
   const handleSubmit = async (e) => {
@@ -33,12 +23,8 @@ const Contact = ({ isVisible }) => {
     setIsSubmitting(true);
     setStatus({ type: "", message: "" });
 
-    // Validation
     if (!formData.name || !formData.email || !formData.message) {
-      setStatus({
-        type: "error",
-        message: "Please fill in all fields",
-      });
+      setStatus({ type: "error", message: "Please fill in all fields" });
       setIsSubmitting(false);
       return;
     }
@@ -66,17 +52,11 @@ const Contact = ({ isVisible }) => {
         setStatus({
           type: "success",
           message:
-            "✅ Message sent successfully! Check your email for confirmation.",
+            "Message sent successfully. Check your email for confirmation.",
         });
 
-        // Clear form
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", message: "" });
 
-        // Clear success message after 8 seconds
         setTimeout(() => {
           setStatus({ type: "", message: "" });
         }, 8000);
@@ -122,7 +102,6 @@ const Contact = ({ isVisible }) => {
             out!
           </p>
 
-          {/* Status Messages */}
           {status.message && (
             <div
               className={`mb-6 p-4 rounded-lg flex items-center gap-3 animate-fade-in ${
@@ -132,9 +111,9 @@ const Contact = ({ isVisible }) => {
               }`}
             >
               {status.type === "success" ? (
-                <CheckCircle size={20} className="flex-shrink-0" />
+                <CheckCircle size={20} />
               ) : (
-                <AlertCircle size={20} className="flex-shrink-0" />
+                <AlertCircle size={20} />
               )}
               <p className="text-sm sm:text-base">{status.message}</p>
             </div>
@@ -142,19 +121,15 @@ const Contact = ({ isVisible }) => {
 
           <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             <div>
-              <label
-                htmlFor="name"
-                className="block text-gray-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
-              >
+              <label className="block text-gray-900 dark:text-white font-semibold mb-2">
                 Name <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-300 text-sm sm:text-base"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600"
                 placeholder="Your Name"
                 required
                 disabled={isSubmitting}
@@ -162,19 +137,15 @@ const Contact = ({ isVisible }) => {
             </div>
 
             <div>
-              <label
-                htmlFor="email"
-                className="block text-gray-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
-              >
+              <label className="block text-gray-900 dark:text-white font-semibold mb-2">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
-                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-300 text-sm sm:text-base"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600"
                 placeholder="your.email@example.com"
                 required
                 disabled={isSubmitting}
@@ -182,32 +153,25 @@ const Contact = ({ isVisible }) => {
             </div>
 
             <div>
-              <label
-                htmlFor="message"
-                className="block text-gray-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
-              >
+              <label className="block text-gray-900 dark:text-white font-semibold mb-2">
                 Message <span className="text-red-500">*</span>
               </label>
               <textarea
-                id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 rows="5"
-                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-300 resize-none text-sm sm:text-base"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 resize-none"
                 placeholder="Your message here..."
                 required
                 disabled={isSubmitting}
               ></textarea>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                Minimum 10 characters
-              </p>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md flex items-center justify-center text-sm sm:text-base ${
+              className={`w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center ${
                 isSubmitting
                   ? "opacity-70 cursor-not-allowed"
                   : "hover:bg-blue-700"
@@ -226,31 +190,24 @@ const Contact = ({ isVisible }) => {
             </button>
           </form>
 
-          {/* Info Box */}
           <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
             <p className="text-sm text-blue-800 dark:text-blue-300 flex items-start gap-2">
-              <Mail size={16} className="mt-0.5 flex-shrink-0" />
-              <span>
-                You'll receive an automatic confirmation email after submitting
-                this form.
-              </span>
+              <Mail size={16} className="mt-0.5" />
+              You will receive a confirmation email after submitting this form.
             </p>
           </div>
 
-          {/* Alternative Contact */}
           <div className="mt-8 pt-8 border-t border-gray-300 dark:border-gray-600 text-center">
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
               Prefer direct contact?
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="mailto:shubham.gupta.stack@gmail.com"
-                className="text-blue-600 dark:text-blue-400 hover:underline font-semibold flex items-center gap-2"
-              >
-                <Mail size={16} />
-                shubham.gupta.stack@gmail.com
-              </a>
-            </div>
+            <a
+              href="mailto:shubham.gupta.stack@gmail.com"
+              className="text-blue-600 dark:text-blue-400 hover:underline font-semibold flex items-center justify-center gap-2"
+            >
+              <Mail size={16} />
+              shubham.gupta.stack@gmail.com
+            </a>
           </div>
         </div>
       </div>
