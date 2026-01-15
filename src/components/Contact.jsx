@@ -1,77 +1,3 @@
-// import { Mail, Send } from "lucide-react";
-
-// const Contact = ({ isVisible }) => {
-//   return (
-//     <section
-//       id="contact"
-//       className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-white dark:bg-gray-900"
-//     >
-//       <div
-//         className={`max-w-4xl mx-auto w-full transition-all duration-1000 ${
-//           isVisible.contact
-//             ? "opacity-100 translate-y-0"
-//             : "opacity-0 translate-y-10"
-//         }`}
-//       >
-//         <div className="flex items-center justify-center mb-10 sm:mb-16">
-//           <Mail size={36} className="text-blue-600 mr-3 sm:w-12 sm:h-12" />
-//           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-//             Get In Touch
-//           </h2>
-//         </div>
-
-//         <div className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8 lg:p-12 border border-gray-200 dark:border-gray-700">
-//           <p className="text-center text-gray-600 dark:text-gray-300 mb-8 sm:mb-10 text-base sm:text-lg lg:text-xl">
-//             Have a project in mind or want to collaborate? Feel free to reach
-//             out!
-//           </p>
-
-//           <div className="space-y-5 sm:space-y-6">
-//             <div>
-//               <label className="block text-gray-900 dark:text-white font-semibold mb-2 text-sm sm:text-base">
-//                 Name
-//               </label>
-//               <input
-//                 type="text"
-//                 className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-300 text-sm sm:text-base"
-//                 placeholder="Your Name"
-//               />
-//             </div>
-
-//             <div>
-//               <label className="block text-gray-900 dark:text-white font-semibold mb-2 text-sm sm:text-base">
-//                 Email
-//               </label>
-//               <input
-//                 type="email"
-//                 className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-300 text-sm sm:text-base"
-//                 placeholder="your.email@example.com"
-//               />
-//             </div>
-
-//             <div>
-//               <label className="block text-gray-900 dark:text-white font-semibold mb-2 text-sm sm:text-base">
-//                 Message
-//               </label>
-//               <textarea
-//                 rows="5"
-//                 className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-300 resize-none text-sm sm:text-base"
-//                 placeholder="Your message here..."
-//               ></textarea>
-//             </div>
-
-//             <button className="w-full bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md flex items-center justify-center text-sm sm:text-base">
-//               Send Message <Send size={20} className="ml-2 animate-pulse" />
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Contact;
-
 import React, { useState } from "react";
 import { Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
 
@@ -90,7 +16,7 @@ const Contact = ({ isVisible }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Change this to your deployed backend URL when live
-  const API_URL = "http://localhost:5000/api/contact";
+  const API_URL = "https://my-portfolio-backend-4gmn.onrender.com";
 
   // If using Vercel serverless in same project:
   // const API_URL = "/api/contact";
