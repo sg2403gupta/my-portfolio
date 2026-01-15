@@ -15,11 +15,8 @@ const Contact = ({ isVisible }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Change this to your deployed backend URL when live
-  const API_URL = "https://my-portfolio-backend-4gmn.onrender.com";
-
-  // If using Vercel serverless in same project:
-  // const API_URL = "/api/contact";
+  //Connecting backend to frontend
+  const API_URL = "https://my-portfolio-backend-4gmn.onrender.com/api/contact";
 
   const handleChange = (e) => {
     setFormData({
