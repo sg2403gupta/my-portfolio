@@ -26,15 +26,17 @@ const About = ({ isVisible, skills }) => {
               Who I Am
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              I'm a passionate MERN stack developer with 3+ years of experience
-              building dynamic web applications. I love transforming complex
-              problems into simple, beautiful, and intuitive solutions.
+              I am a passionate fresher MERN stack developer with strong
+              hands-on experience in building full-stack web applications using
+              modern JavaScript technologies. I focus on writing clean,
+              maintainable code and creating responsive, user-friendly
+              interfaces.
             </p>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-              My journey in web development started with a curiosity about how
-              websites work, and it has evolved into a career where I create
-              full-stack applications that make a difference. I'm constantly
-              learning and staying updated with the latest technologies.
+              I have worked on multiple academic and personal projects involving
+              RESTful APIs, backend logic, database integration, and frontend
+              development. I am eager to learn, grow, and contribute to
+              real-world software solutions in a professional environment.
             </p>
           </div>
 

@@ -29,19 +29,19 @@ const Home = ({ isVisible }) => {
 
         <div className="flex justify-center space-x-6 mt-10 fade-in-up">
           <a
-            href="#"
+            href="https://github.com/sg2403gupta"
             className="text-gray-600 dark:text-gray-300 hover:text-blue-600"
           >
             <Github size={32} />
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/shubham-gupta-a2855b236/"
             className="text-gray-600 dark:text-gray-300 hover:text-blue-600"
           >
             <Linkedin size={32} />
           </a>
           <a
-            href="#"
+            href="mailto:shubham.gupta.stack@gmail.com"
             className="text-gray-600 dark:text-gray-300 hover:text-blue-600"
           >
             <Mail size={32} />

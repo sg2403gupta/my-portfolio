@@ -77,7 +77,7 @@ const Portfolio = () => {
           ...p,
           x: (p.x + p.speedX + 100) % 100,
           y: (p.y + p.speedY + 100) % 100,
-        }))
+        })),
       );
     }, 50);
     return () => clearInterval(interval);
@@ -121,7 +121,7 @@ const Portfolio = () => {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     document.querySelectorAll("section").forEach((section) => {
@@ -240,17 +240,18 @@ const Portfolio = () => {
   ];
 
   const skills = [
-    "MongoDB",
-    "Express.js",
+    "JavaScript (ES6+)",
     "React.js",
     "Node.js",
-    "JavaScript",
-    "TypeScript",
-    "TailwindCSS",
-    "Redux",
+    "Express.js",
+    "MongoDB",
     "REST APIs",
+    "AI API Integration",
+    "Prompt Engineering",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
     "Git",
-    "Docker",
   ];
 
   return (
