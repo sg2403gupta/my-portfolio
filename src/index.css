@@ -2,6 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global Font Styling */
+html {
+  font-family:
+    "Zen Dots",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  font-family: "Zen Dots", cursive;
+  font-family: inherit;
+}
+
+/* Animations */
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility animation classes */
+.animate-floatSoft {
+  animation: floatSoft 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.9s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Accessibility: motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .animate-floatSoft,
+  .animate-fadeUp,
+  .animate-slideDown {
+    animation: none !important;
+    will-change: auto;
+  }
 }

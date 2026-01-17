@@ -36,40 +36,48 @@ const Portfolio = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [particles, setParticles] = useState([]);
 
-  // Loading
+  /* ---------------- DARK MODE (✅ FIX) ---------------- */
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2500);
+    const root = document.documentElement;
+    if (darkMode) root.classList.add("dark");
+    else root.classList.remove("dark");
+  }, [darkMode]);
+
+  /* ---------------- LOADING ---------------- */
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2500);
+    return () => clearTimeout(timer);
   }, []);
 
-  // 🔗 Handle direct links like /#projects or /#certificates
+  /* ---------------- HASH NAV ---------------- */
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
-    if (hash) {
-      setTimeout(() => {
-        const section = document.getElementById(hash);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-          setIsVisible((prev) => ({ ...prev, [hash]: true }));
-          setActiveSection(hash);
-        }
-      }, 300);
-    }
+    if (!hash) return;
+
+    setTimeout(() => {
+      const section = document.getElementById(hash);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        setIsVisible((prev) => ({ ...prev, [hash]: true }));
+        setActiveSection(hash);
+      }
+    }, 300);
   }, []);
 
-  // Generate particles
+  /* ---------------- PARTICLES ---------------- */
   useEffect(() => {
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 2,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
-    }));
-    setParticles(newParticles);
+    setParticles(
+      Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 4 + 2,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+      })),
+    );
   }, []);
 
-  // Animate particles
   useEffect(() => {
     const interval = setInterval(() => {
       setParticles((prev) =>
@@ -80,10 +88,11 @@ const Portfolio = () => {
         })),
       );
     }, 50);
+
     return () => clearInterval(interval);
   }, []);
 
-  // Cursor trail
+  /* ---------------- CURSOR ---------------- */
   useEffect(() => {
     const handleMouseMove = (e) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
@@ -96,38 +105,35 @@ const Portfolio = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Scroll progress
+  /* ---------------- SCROLL ---------------- */
   useEffect(() => {
     const handleScroll = () => {
-      const totalHeight =
+      const total =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
-      setScrollProgress(progress);
+      setScrollProgress((window.scrollY / total) * 100);
       setShowBackToTop(window.scrollY > 500);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Section observer
+  /* ---------------- OBSERVER ---------------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({ ...prev, [entry.target.id]: true }));
-            setActiveSection(entry.target.id);
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setIsVisible((prev) => ({ ...prev, [e.target.id]: true }));
+            setActiveSection(e.target.id);
           }
         });
       },
       { threshold: 0.3 },
     );
 
-    document.querySelectorAll("section").forEach((section) => {
-      observer.observe(section);
-    });
-
+    document.querySelectorAll("section").forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
 
@@ -136,64 +142,36 @@ const Portfolio = () => {
     setIsMenuOpen(false);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Data
+  /* ---------------- DATA ---------------- */
   const projects = [
     {
       title: "PrepBot: Interview Practice System",
       description:
-        "A MERN app for technical interview prep using a locally hosted AI. Generates role-specific questions, evaluates answers with hybrid AI + rules, and provides personalized feedback with secure, privacy-first session analytics.",
-      tech: [
-        "MongoDB",
-        "Express.js",
-        "React",
-        "Node.js",
-        "Open-Meteo API",
-        "OpenAQ API",
-        "Ollama (phi3:mini)",
-        "DSA",
-      ],
+        "A MERN app for interview prep using local AI with evaluation and analytics.",
+      tech: ["MongoDB", "Express", "React", "Node", "Ollama", "DSA"],
       image: prepbotImg,
       link: "https://ai-interview-frontend-ivory.vercel.app/",
     },
     {
-      title: "The Wild Oasis (Hotel Management System)",
-      description:
-        "A full-stack hotel management system with user and admin dashboards for bookings and operations. Built with React, Next.js, Tailwind, Styled Components, and Supabase for authentication, data, and real-time workflows.",
-      tech: [
-        "React",
-        "Next.js",
-        "Tailwind CSS",
-        "Styled Components",
-        "Supabase",
-      ],
+      title: "The Wild Oasis",
+      description: "Hotel management system with admin & user dashboards.",
+      tech: ["React", "Next.js", "Tailwind", "Supabase"],
       image: oasisImg,
       link: "https://oasis-hotel-hub.vercel.app/login",
     },
     {
       title: "Weather & AQI Platform",
-      description:
-        "A MERN analytics app using Open-Meteo and OpenAQ for real-time weather and air quality. Implements DSA-based forecasting, priority alerts, decision-tree AQI classification, and LRU caching on a fully free, scalable stack.",
-      tech: [
-        "MongoDB",
-        "Express.js",
-        "React",
-        "Node.js",
-        "Open-Meteo API",
-        "OpenAQ API",
-        "DSA",
-      ],
+      description: "Weather + AQI analytics with caching and alerts.",
+      tech: ["MongoDB", "Express", "React", "Node"],
       image: weatherImg,
       link: "https://weather-aqi-platform.vercel.app/",
     },
     {
-      title: "ClinckNChow",
-      description:
-        "A modern and responsive food ordering web application built with React JS, Bootstrap, and React Router. Users can browse food items, add them to a cart, and place orders — all with a smooth single-page application (SPA) experience.",
-      tech: ["React JS", "React Router", "Bootstrap", "Vite"],
+      title: "ClickNChow",
+      description: "Food ordering SPA with cart and routing.",
+      tech: ["React", "Vite", "Bootstrap"],
       image: foodImg,
       link: "https://ai-interview-frontend-ivory.vercel.app/",
     },
@@ -201,61 +179,48 @@ const Portfolio = () => {
 
   const certificates = [
     {
-      title:
-        "PBEL Equivalent to Virtual Internship – Web, Mobile Development & Marketing",
+      title: "IBM Virtual Internship",
       issuer: "IBM Developer Skills Network",
       date: "2025",
-      description:
-        "Industry-recognized virtual internship focused on web and mobile development, project-based learning, and professional skills.",
       image: ibmInternshipCert,
-      link: "https://drive.google.com/file/d/1StONUW7JyTH7LbK_anleC_5khDdQoE2_/view",
+      link: "https://drive.google.com/",
     },
     {
       title: "Programming in Java",
-      issuer: "NPTEL (IIT Kharagpur) – SWAYAM",
+      issuer: "NPTEL – IIT Kharagpur",
       date: "2025",
-      description:
-        "Elite certification in Java programming covering OOP, data structures, exception handling, and application development with a proctored exam.",
       image: nptelJavaCert,
-      link: "https://drive.google.com/file/d/1iY1yE6oxYuc-JmBcmUtN7kzT6o0gtwTs/view",
+      link: "https://drive.google.com/",
     },
     {
-      title: "The Ultimate React Course 2025: React, Next.js, Redux & More",
+      title: "Ultimate React Course",
       issuer: "Udemy",
       date: "2025",
-      description:
-        "Comprehensive React training covering modern React, Next.js, Redux, hooks, performance optimization, and real-world projects.",
       image: reactUdemyCert,
-      link: "https://drive.google.com/file/d/12MtXUqPbkn6PPkabka_IwqO1KiU79sWD/view",
+      link: "https://drive.google.com/",
     },
     {
-      title: "Oracle Certified Foundations Associate",
+      title: "Oracle Foundations Associate",
       issuer: "Oracle University",
       date: "2025",
-      description:
-        "Foundational certification covering cloud infrastructure, databases, security, and core IT concepts using Oracle Cloud Infrastructure (OCI).",
       image: oracleCert,
-      link: "https://drive.google.com/file/d/1I5OkDFfTr7RIyYa-Hwd6E-Gv9tSl2hE4/view?usp=drive_link",
+      link: "https://drive.google.com/",
     },
   ];
 
   const skills = [
-    "JavaScript (ES6+)",
-    "React.js",
+    "JavaScript",
+    "React",
     "Node.js",
-    "Express.js",
+    "Express",
     "MongoDB",
     "REST APIs",
-    "AI API Integration",
-    "Prompt Engineering",
-    "HTML5",
-    "CSS3",
     "Tailwind CSS",
     "Git",
   ];
 
   return (
-    <div className={`${darkMode ? "dark" : ""} min-h-screen`}>
+    <div className="min-h-screen">
       {isLoading && <LoadingScreen />}
 
       <CustomCursor cursorPos={cursorPos} cursorTrail={cursorTrail} />

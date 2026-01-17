@@ -1,21 +1,30 @@
 const LoadingScreen = () => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-gray-900">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#F9F7F7] dark:bg-[#0F0F0F]">
       <div className="text-center">
+        {/* Spinner */}
         <div className="relative w-32 h-32 mx-auto mb-8">
+          {/* Pulse ring */}
           <div
-            className="absolute inset-0 border-4 border-blue-200 rounded-full animate-ping"
-            style={{
-              animation:
-                "pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-            }}
-          ></div>
+            className="
+              absolute inset-0 rounded-full
+              border-4 border-[#3F72AF]/30
+              animate-ping
+            "
+          />
+
+          {/* Spinner */}
           <div
-            className="relative w-32 h-32 border-t-4 border-blue-600 rounded-full"
-            style={{ animation: "spin 1s linear infinite" }}
-          ></div>
+            className="
+              relative w-32 h-32 rounded-full
+              border-t-4 border-[#3F72AF]
+              animate-spin
+            "
+          />
         </div>
-        <h2 className="text-2xl font-bold animated-gradient-text">
+
+        {/* Text */}
+        <h2 className="text-2xl font-bold text-[#112D4E] dark:text-[#F9F7F7]">
           Loading Portfolio...
         </h2>
       </div>

@@ -54,20 +54,15 @@ const Contact = ({ isVisible }) => {
           message:
             "Message sent successfully. Check your email for confirmation.",
         });
-
         setFormData({ name: "", email: "", message: "" });
-
-        setTimeout(() => {
-          setStatus({ type: "", message: "" });
-        }, 8000);
+        setTimeout(() => setStatus({ type: "", message: "" }), 8000);
       } else {
         setStatus({
           type: "error",
           message: data.error || "Failed to send message. Please try again.",
         });
       }
-    } catch (error) {
-      console.error("API Error:", error);
+    } catch {
       setStatus({
         type: "error",
         message: "Server error. Please try again later.",
@@ -80,34 +75,37 @@ const Contact = ({ isVisible }) => {
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-white dark:bg-gray-900"
+      className="min-h-screen flex items-center px-4 py-16 bg-[#F9F7F7] dark:bg-[#0F0F0F]"
     >
       <div
-        className={`max-w-4xl mx-auto w-full transition-all duration-1000 ${
-          isVisible.contact
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10"
-        }`}
+        className={`
+          max-w-4xl mx-auto w-full
+          transition-all duration-700 ease-out
+          ${isVisible.contact ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+        `}
       >
-        <div className="flex items-center justify-center mb-10 sm:mb-16">
-          <Mail size={36} className="text-blue-600 mr-3 sm:w-12 sm:h-12" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
+        {/* Header */}
+        <div className="flex items-center justify-center mb-14">
+          <Mail className="w-9 h-9 mr-3 text-[#3F72AF]" />
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#112D4E] dark:text-[#F9F7F7]">
             Get In Touch
           </h2>
         </div>
 
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8 lg:p-12 border border-gray-200 dark:border-gray-700">
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 sm:mb-10 text-base sm:text-lg lg:text-xl">
+        {/* Card */}
+        <div className="rounded-xl bg-[#DBE2EF] dark:bg-[#161616] p-6 sm:p-8 lg:p-12 shadow-sm">
+          <p className="text-center text-[#112D4E]/80 dark:text-[#F9F7F7]/80 mb-10 text-base sm:text-lg">
             Have a project in mind or want to collaborate? Feel free to reach
-            out!
+            out.
           </p>
 
+          {/* Status */}
           {status.message && (
             <div
-              className={`mb-6 p-4 rounded-lg flex items-center gap-3 animate-fade-in ${
+              className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
                 status.type === "success"
-                  ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
-                  : "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border border-red-300 dark:border-red-700"
+                  ? "bg-[#3F72AF]/10 text-[#3F72AF]"
+                  : "bg-red-500/10 text-red-600"
               }`}
             >
               {status.type === "success" ? (
@@ -119,91 +117,82 @@ const Contact = ({ isVisible }) => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-            <div>
-              <label className="block text-gray-900 dark:text-white font-semibold mb-2">
-                Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600"
-                placeholder="Your Name"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {["name", "email"].map((field) => (
+              <div key={field}>
+                <label className="block font-semibold mb-2 text-[#112D4E] dark:text-[#F9F7F7] capitalize">
+                  {field}
+                </label>
+                <input
+                  type={field === "email" ? "email" : "text"}
+                  name={field}
+                  value={formData[field]}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="
+                    w-full px-4 py-3 rounded-lg
+                    bg-[#F9F7F7] dark:bg-[#0F0F0F]
+                    text-[#112D4E] dark:text-[#F9F7F7]
+                    border border-[#3F72AF]/40
+                    focus:outline-none focus:border-[#3F72AF]
+                    transition
+                  "
+                />
+              </div>
+            ))}
 
             <div>
-              <label className="block text-gray-900 dark:text-white font-semibold mb-2">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600"
-                placeholder="your.email@example.com"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-900 dark:text-white font-semibold mb-2">
-                Message <span className="text-red-500">*</span>
+              <label className="block font-semibold mb-2 text-[#112D4E] dark:text-[#F9F7F7]">
+                Message
               </label>
               <textarea
                 name="message"
+                rows="5"
                 value={formData.message}
                 onChange={handleChange}
-                rows="5"
-                className="w-full px-4 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-600 resize-none"
-                placeholder="Your message here..."
-                required
                 disabled={isSubmitting}
-              ></textarea>
+                className="
+                  w-full px-4 py-3 rounded-lg resize-none
+                  bg-[#F9F7F7] dark:bg-[#0F0F0F]
+                  text-[#112D4E] dark:text-[#F9F7F7]
+                  border border-[#3F72AF]/40
+                  focus:outline-none focus:border-[#3F72AF]
+                  transition
+                "
+              />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center ${
-                isSubmitting
-                  ? "opacity-70 cursor-not-allowed"
-                  : "hover:bg-blue-700"
-              }`}
+              className="
+                w-full flex items-center justify-center gap-2
+                bg-[#3F72AF] text-[#F9F7F7]
+                py-3 rounded-lg font-semibold
+                transition-all duration-300
+                hover:-translate-y-0.5 hover:shadow-lg
+                disabled:opacity-70 disabled:cursor-not-allowed
+              "
             >
               {isSubmitting ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Sending...
-                </>
+                "Sending..."
               ) : (
                 <>
-                  Send Message <Send size={20} className="ml-2" />
+                  Send Message <Send size={18} />
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-            <p className="text-sm text-blue-800 dark:text-blue-300 flex items-start gap-2">
-              <Mail size={16} className="mt-0.5" />
-              You will receive a confirmation email after submitting this form.
-            </p>
-          </div>
-
-          <div className="mt-8 pt-8 border-t border-gray-300 dark:border-gray-600 text-center">
-            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+          {/* Footer */}
+          <div className="mt-10 pt-8 border-t border-[#3F72AF]/30 text-center">
+            <p className="text-sm text-[#112D4E]/70 dark:text-[#F9F7F7]/70 mb-3">
               Prefer direct contact?
             </p>
             <a
               href="mailto:shubham.gupta.stack@gmail.com"
-              className="text-blue-600 dark:text-blue-400 hover:underline font-semibold flex items-center justify-center gap-2"
+              className="inline-flex items-center gap-2 font-semibold text-[#3F72AF] hover:underline"
             >
               <Mail size={16} />
               shubham.gupta.stack@gmail.com

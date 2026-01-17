@@ -4,51 +4,79 @@ const About = ({ isVisible, skills }) => {
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-gray-50 dark:bg-gray-800"
+      className="
+        min-h-screen flex items-center px-4 py-16
+        bg-[#F9F7F7] dark:bg-[#0F0F0F]
+      "
     >
       <div
-        className={`max-w-7xl mx-auto w-full transition-all duration-1000 ${
-          isVisible.about
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10"
-        }`}
+        className={`
+          max-w-7xl mx-auto w-full
+          transition-all duration-700 ease-out
+          ${isVisible.about ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+        `}
       >
-        <div className="flex items-center justify-center mb-10 sm:mb-16">
-          <User size={36} className="text-blue-600 mr-3 sm:w-12 sm:h-12" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
+        {/* Header */}
+        <div className="flex items-center justify-center mb-12">
+          <User className="w-9 h-9 mr-3 text-[#3F72AF]" />
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#112D4E] dark:text-[#F9F7F7]">
             About Me
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          <div className="bg-white dark:bg-gray-900 p-6 sm:p-8 lg:p-10 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Who I Am */}
+          <div
+            className="
+              rounded-xl p-6 sm:p-8
+              bg-[#DBE2EF] dark:bg-[#161616]
+              shadow-sm
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-lg
+            "
+          >
+            <h3 className="text-2xl font-semibold text-[#112D4E] dark:text-[#F9F7F7] mb-4">
               Who I Am
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              I am a passionate fresher MERN stack developer with strong
-              hands-on experience in building full-stack web applications using
-              modern JavaScript technologies. I focus on writing clean,
-              maintainable code and creating responsive, user-friendly
-              interfaces.
+
+            <p className="text-sm sm:text-base leading-relaxed text-[#112D4E]/80 dark:text-[#F9F7F7]/80 mb-4">
+              I am a passionate fresher MERN stack developer with hands-on
+              experience building full-stack applications using modern
+              JavaScript technologies. I focus on clean, maintainable code and
+              responsive user interfaces.
             </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-              I have worked on multiple academic and personal projects involving
-              RESTful APIs, backend logic, database integration, and frontend
-              development. I am eager to learn, grow, and contribute to
-              real-world software solutions in a professional environment.
+
+            <p className="text-sm sm:text-base leading-relaxed text-[#112D4E]/80 dark:text-[#F9F7F7]/80">
+              I’ve worked on academic and personal projects involving REST APIs,
+              backend logic, database integration, and frontend development. I’m
+              eager to learn and contribute to real-world software solutions.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 p-6 sm:p-8 lg:p-10 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8">
+          {/* Skills */}
+          <div
+            className="
+              rounded-xl p-6 sm:p-8
+              bg-[#DBE2EF] dark:bg-[#161616]
+              shadow-sm
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-lg
+            "
+          >
+            <h3 className="text-2xl font-semibold text-[#112D4E] dark:text-[#F9F7F7] mb-6">
               Skills & Technologies
             </h3>
+
             <div className="flex flex-wrap gap-3">
               {skills.map((skill, index) => (
                 <span
                   key={index}
-                  className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transform hover:scale-110 hover:bg-blue-700 hover:rotate-3 transition-all duration-300 shadow-sm"
+                  className="
+                    px-4 py-2 rounded-lg text-sm font-medium
+                    bg-[#3F72AF] text-[#F9F7F7]
+                    transition-transform duration-200
+                    hover:scale-105 hover:bg-[#2F5F99]
+                  "
                 >
                   {skill}
                 </span>

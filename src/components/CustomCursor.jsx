@@ -7,20 +7,18 @@ const CustomCursor = ({ cursorPos, cursorTrail }) => {
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
-          transform: "translate(-50%, -50%)",
         }}
       />
 
       {/* Cursor Trail */}
       {cursorTrail.map((trail, i) => (
         <div
-          key={trail.id} // ✅ stable unique key
+          key={trail.id}
           className="cursor-trail"
           style={{
             left: `${trail.x}px`,
             top: `${trail.y}px`,
-            transform: "translate(-50%, -50%)",
-            opacity: ((i + 1) / cursorTrail.length) * 0.5,
+            opacity: ((i + 1) / cursorTrail.length) * 0.45,
           }}
         />
       ))}

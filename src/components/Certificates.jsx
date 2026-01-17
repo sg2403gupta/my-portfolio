@@ -4,56 +4,81 @@ const Certificates = ({ isVisible, certificates = [], setSelectedImage }) => {
   return (
     <section
       id="certificates"
-      className="min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-gray-50 dark:bg-gray-800"
+      className="
+        min-h-screen px-4 py-16
+        bg-[#F9F7F7] dark:bg-[#0F0F0F]
+      "
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-1000 ${
-          isVisible?.certificates
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10"
-        }`}
+        className={`
+          max-w-7xl mx-auto
+          transition-all duration-700 ease-out
+          ${
+            isVisible?.certificates
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
+          }
+        `}
       >
-        <div className="flex items-center justify-center mb-10 sm:mb-16">
-          <Award size={36} className="text-blue-600 mr-3 sm:w-12 sm:h-12" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
+        {/* Header */}
+        <div className="flex items-center justify-center mb-14">
+          <Award className="w-9 h-9 mr-3 text-[#3F72AF]" />
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#112D4E] dark:text-[#F9F7F7]">
             Certificates
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+        {/* Grid */}
+        <div className="grid sm:grid-cols-2 gap-8">
           {certificates.map((cert, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-md hover:shadow-2xl border border-gray-200 dark:border-gray-700 transform hover:scale-105 hover:-rotate-1 transition-all duration-500 overflow-hidden"
+              className="
+                group rounded-xl overflow-hidden
+                bg-[#DBE2EF] dark:bg-[#161616]
+                shadow-sm
+                transition-all duration-300
+                hover:-translate-y-1 hover:shadow-xl
+              "
             >
+              {/* Image */}
               <div
-                className="h-40 sm:h-48 overflow-hidden"
+                className="h-44 overflow-hidden cursor-pointer"
                 onClick={() => setSelectedImage?.(cert.image)}
               >
                 <img
                   src={cert.image}
                   alt={cert.title}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  className="
+                    w-full h-full object-cover
+                    transition-transform duration-500
+                    group-hover:scale-105
+                  "
                 />
               </div>
 
-              <div className="p-5 sm:p-6 lg:p-8">
-                <div className="flex items-start">
+              {/* Content */}
+              <div className="p-6">
+                <div className="flex items-start gap-3">
                   <Award
-                    className="text-blue-600 mr-3 mt-1 flex-shrink-0"
-                    size={24}
+                    className="text-[#3F72AF] mt-1 flex-shrink-0"
+                    size={22}
                   />
-                  <div className="w-full">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-[#112D4E] dark:text-[#F9F7F7] mb-1">
                       {cert.title}
                     </h3>
-                    <p className="text-blue-600 dark:text-blue-400 font-semibold mb-1 text-sm sm:text-base">
+
+                    <p className="text-sm font-semibold text-[#3F72AF] mb-1">
                       {cert.issuer}
                     </p>
-                    <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm mb-2">
+
+                    <p className="text-xs text-[#112D4E]/60 dark:text-[#F9F7F7]/60 mb-2">
                       {cert.date}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-4">
+
+                    <p className="text-sm text-[#112D4E]/80 dark:text-[#F9F7F7]/80 mb-4">
                       {cert.description}
                     </p>
 
@@ -62,10 +87,15 @@ const Certificates = ({ isVisible, certificates = [], setSelectedImage }) => {
                         href={cert.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 transition-all duration-300 text-sm sm:text-base"
+                        className="
+                          inline-flex items-center gap-2
+                          text-sm font-semibold
+                          text-[#3F72AF]
+                          hover:underline
+                        "
                       >
-                        View Certificate{" "}
-                        <ExternalLink size={16} className="ml-2" />
+                        View Certificate
+                        <ExternalLink size={16} />
                       </a>
                     )}
                   </div>

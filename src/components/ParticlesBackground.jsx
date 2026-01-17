@@ -4,14 +4,18 @@ const ParticlesBackground = ({ particles }) => {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-blue-500 opacity-20"
+          className="
+            absolute rounded-full
+            bg-[#3F72AF]/20
+            dark:bg-[#3F72AF]/10
+          "
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
             width: `${p.size}px`,
             height: `${p.size}px`,
           }}
-        ></div>
+        />
       ))}
     </div>
   );
